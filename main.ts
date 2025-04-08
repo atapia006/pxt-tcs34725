@@ -1,4 +1,3 @@
-//% color=#800080 weight=100 icon="\uf2db" block="TCS34725"
 namespace tcs34725 {
     // I2C address of TCS34725 (fixed)
     const TCS34725_ADDRESS = 0x29;
@@ -46,5 +45,40 @@ namespace tcs34725 {
 
         _initialized = true;
         basic.pause(3); // Wait for first measurement
+    }
+
+    //% block="Read Red"
+    //% subcategory="Measurements"
+    export function readRed(): number {
+        initialize(); // Auto-initialize if needed
+        return readWordReg(RDATA);
+    }
+
+    //% block="Read Green"
+    //% subcategory="Measurements"
+    export function readGreen(): number {
+        initialize();
+        return readWordReg(GDATA);
+    }
+
+    //% block="Read Blue"
+    //% subcategory="Measurements"
+    export function readBlue(): number {
+        initialize();
+        return readWordReg(BDATA);
+    }
+
+    //% block="Read Clear Light"
+    //% subcategory="Measurements"
+    export function readClear(): number {
+        initialize();
+        return readWordReg(CDATA);
+    }
+
+    //% block="Read RGB Values"
+    //% subcategory="Measurements"
+    export function readRGB(): number[] {
+        initialize();
+        return [readRed(), readGreen(), readBlue()];
     }
 }
