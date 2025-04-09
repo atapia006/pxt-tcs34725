@@ -91,9 +91,12 @@ namespace tcs34725 {
         let normG = g / 65535;
         let normB = b / 65535;
 
-        // RGB → HSV bihurtzeko algoritmoa
-        let max = Math.max(normR, normG, normB);
-        let min = Math.min(normR, normG, normB);
+        // MAX eta MIN kalkulatu (2 argumentu bakoitzeko)
+        let max1 = Math.max(normR, normG);
+        let max = Math.max(max1, normB);  // 3 balioetako max
+        let min1 = Math.min(normR, normG);
+        let min = Math.min(min1, normB);  // 3 balioetako min
+
         let delta = max - min;
 
         let h = 0, s = 0, v = max * 100;
