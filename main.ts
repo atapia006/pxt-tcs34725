@@ -81,4 +81,32 @@ namespace tcs34725 {
         initialize();
         return [red(), green(), blue()];
     }
+
+    //% block="Get HSV values"
+    export function getHSV(): number[] {
+        let [r, g, b] = rgb();  // RGB lortu (0-65535)
+
+        // Normalizatu (0-1)
+        let normR = r / 65535;
+        let normG = g / 65535;
+        let normB = b / 65535;
+
+        // RGB → HSV bihurtzeko algoritmoa
+        let max = Math.max(normR, normG, normB);
+        let min = Math.min(normR, normG, normB);
+        let delta = max - min;
+
+        let h = 0, s = 0, v = max * 100;
+
+        if (delta > 0) {
+            s = (delta / max) * 100;
+            if (max == normR) h = ((normG - normB) / delta) % 6;
+            else if (max == normG) h = (normB - normR) / delta + 2;
+            else h = (normR - normG) / delta + 4;
+            h = Math.round(h * 60);
+            if (h < 0) h += 360;
+        }
+
+        return [h, s, v];  // [H°, S%, V%]
+    }
 }
