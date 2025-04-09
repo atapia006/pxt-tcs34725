@@ -1,3 +1,4 @@
+//% color=#800080 weight=100 icon="\uf2db" block="TCS34725"
 namespace tcs34725 {
     // I2C address of TCS34725 (fixed)
     const TCS34725_ADDRESS = 0x29;
@@ -55,7 +56,7 @@ namespace tcs34725 {
     }
 
     //% block="Read Green"
-    //% subcategory="Measurements"
+    //% subcategory="Measurements" 
     export function readGreen(): number {
         initialize();
         return readWordReg(GDATA);
